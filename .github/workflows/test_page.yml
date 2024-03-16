@@ -1,0 +1,28 @@
+name: first page of test site
+
+on:
+  push:
+    branches: [ "main" ]
+ 
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: installing NODE MODULE
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version:12
+
+    - name: Installing surge
+      run: npm install --global surge
+    - name: seploying test page
+      run: surge ./ first_adnanatbit.surge.sh --token ${{secrets.SURGE_TOKEN}}
+      
+      run: |
+        docker run \
+        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
+        jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
