@@ -22,7 +22,4 @@ jobs:
     - name: seploying test page
       run: surge ./ first_adnanatbit.surge.sh --token ${{secrets.SURGE_TOKEN}}
       
-      run: |
-        docker run \
-        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-        jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+     
